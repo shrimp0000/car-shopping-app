@@ -254,27 +254,6 @@ def worker(car_url):
 
         except Exception as e:
             print("Error extracting:", e)
-        # driver.set_page_load_timeout(30)
-        # attempt = 0
-        # while attempt < 2:
-        #     try:
-        #         driver.get(car_url)
-        #         print(f"Processing URL: {car_url}")
-        #         res[car_url].update(find_car_specs(driver))
-        #         res[car_url].update(find_seller_info_car_info(driver))
-        #         res[car_url].update(find_vehicle_ratings(driver))
-                
-        #         break
-
-        #     except TimeoutException:
-        #         attempt += 1
-        #         print(f"Timeout while loading {car_url}. Retrying... ({attempt}/2)")
-        #         if attempt == 2:
-        #             print(f"Skipping {car_url} due to repeated timeouts.")
-        #             return None
-        #     except Exception as e:
-        #         print(f"Error extracting from {car_url}: {e}")
-        #         break 
             
     finally:
         driver.quit()
@@ -282,29 +261,6 @@ def worker(car_url):
     return res
     
 if __name__ == "__main__":
-    
-    # for i in range(1):
-    #     info = scrape_main_page(cur_url)
-    #     main_page_info = info[0] # {'url': {'img_src': [], 'mileage': '123'}}
-    #     cur_url = web_url + info[1]
-        
-    #     links = list(main_page_info.keys())
-        
-    #     print(f"Found {len(links)} links. Starting multiprocessing...")
-
-    #     ts = time()
-    #     with mp.Pool(processes=mp.cpu_count()) as pool:
-    #         detail_page_info = pool.map(worker, links) # [{'url': {'color': 'red'}}, {'url': {'color': 'blue'}}]
-        
-    #     for detail in detail_page_info:
-    #         detail_url = list(detail.keys())[0]
-    #         detail_info = detail[detail_url]
-    #         main_page_info[detail_url].update(detail_info)
-    #         collection.insert_one(main_page_info[detail_url])
-        
-    #     # print(main_page_info)
-            
-    #     print(f'page {i+1} Took {time() - ts}s')
     
     for i in range(5):
         info = scrape_main_page(cur_url)
